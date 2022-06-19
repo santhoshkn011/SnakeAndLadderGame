@@ -5,11 +5,11 @@ package com.bridgelabz;
 import java.util.Random; //importing Random function
 
 public class SnakeAndLadderGame {
+    public static int playerOnePosition = 0;//Initial player1 position.
+    public static final int winPosition = 100; //win position is at 100
     public static void main(String args[]) {
         //welcome message
         System.out.println("Welcome to Snake and Ladder Game. \nLet's Begin.........");
-        int playerOnePosition = 0; //Initial player1 position.
-        int winPosition = 100; //win position is at 100
         System.out.println("Player1 position: " + playerOnePosition + "\n");
         //Player1 position initial = 0 and rolled die.
         System.out.println("Player1 rolls the die.");
@@ -20,15 +20,29 @@ public class SnakeAndLadderGame {
         Check position using Random:
         If player rolled 6, player moves and rolls a die again else will stay in same position. That is at 0.
         */
-        if(dieRolled == 6) {
+        if(dieRolled ==6 ) {
             System.out.println("Hurray! Player1 enters.\n");
+            //Rolling the die till player1 reaches 100 or win.
             while(playerOnePosition<=winPosition){
+                //Rolling the die after player enters into the game.
                 dieRolled = random.nextInt(6) + 1;
                 System.out.println("Die rolled: " + dieRolled);
-                playerOnePosition = playerOnePosition + dieRolled;
+                playerOnePosition = playerOnePosition + dieRolled; //Player1 moving with the die number.
+                if(playerOnePosition>100){
+                    //After rolling the die, if it exceeds 100. Stays in same position and continuing the loop.
+                    playerOnePosition = playerOnePosition - dieRolled; //same position
+                    System.out.println("Oops! Roll again. Player1 position: " + playerOnePosition + "\n");
+                    continue;
+                }
+                else if(playerOnePosition == 100) {
+                    //Winning the game.
+                    System.out.println("Player1 position: " + playerOnePosition);
+                    System.out.println("Congratulations! Player1 Won the game......");
+                    break;
+                }
                 System.out.println("Player1 position: " + playerOnePosition);
-
                 switch(playerOnePosition) {
+                    //Snake positions
                     case 32:
                         System.out.println("Oops: it's a Snake, moved down to 10.");
                         playerOnePosition = 10;
@@ -57,6 +71,7 @@ public class SnakeAndLadderGame {
                         System.out.println("Oops: it's a Snake, moved down to 78.");
                         playerOnePosition = 78;
                         break;
+                    //Ladder positions
                     case 1:
                         System.out.println("Hurray: it's a Ladder, moved up to 38.");
                         playerOnePosition = 38;
