@@ -9,6 +9,7 @@ public class SnakeAndLadderGame {
         //welcome message
         System.out.println("Welcome to Snake and Ladder Game. \nLet's Begin.........");
         int playerOnePosition = 0; //Initial player1 position.
+        int winPosition = 100; //win position is at 100
         System.out.println("Player1 position: " + playerOnePosition + "\n");
         //Player1 position initial = 0 and rolled die.
         System.out.println("Player1 rolls the die.");
@@ -20,26 +21,76 @@ public class SnakeAndLadderGame {
         If player rolled 6, player moves and rolls a die again else will stay in same position. That is at 0.
         */
         if(dieRolled == 6) {
-            System.out.println("Hurray! Player1 enters into the game.\n");
-            //again player1 rolls the die.
-            dieRolled = random.nextInt(6) + 1;
-            System.out.println("Die rolled: " + dieRolled);
-            //Using Switch and case to check for ladder or snake, else player will be at same position.
-            switch(dieRolled) {
-                case 1:
-                case 2:
-                case 3:
-                    System.out.println("Hurray: it's a Ladder.");
-                    playerOnePosition = playerOnePosition + dieRolled;
-                    System.out.println("Player1 position: " + playerOnePosition);
-                    break;
-                case 4:
-                case 5:
-                default :
-                    System.out.println("Oops: it's a Snake, moved down to 0.");
-                    playerOnePosition = 0;
-                    System.out.println("Player1 position: " + playerOnePosition);
-                    break;
+            System.out.println("Hurray! Player1 enters.\n");
+            while(playerOnePosition<=winPosition){
+                dieRolled = random.nextInt(6) + 1;
+                System.out.println("Die rolled: " + dieRolled);
+                playerOnePosition = playerOnePosition + dieRolled;
+                System.out.println("Player1 position: " + playerOnePosition);
+
+                switch(playerOnePosition) {
+                    case 32:
+                        System.out.println("Oops: it's a Snake, moved down to 10.");
+                        playerOnePosition = 10;
+                        break;
+                    case 36:
+                        System.out.println("Oops: it's a Snake, moved down to 6.");
+                        playerOnePosition = 6;
+                        break;
+                    case 48:
+                        System.out.println("Oops: it's a Snake, moved down to 26.");
+                        playerOnePosition = 26;
+                        break;
+                    case 62:
+                        System.out.println("Oops: it's a Snake, moved down to 18.");
+                        playerOnePosition = 18;
+                        break;
+                    case 88:
+                        System.out.println("Oops: it's a Snake, moved down to 24.");
+                        playerOnePosition = 24;
+                        break;
+                    case 95:
+                        System.out.println("Oops: it's a Snake, moved down to 56.");
+                        playerOnePosition = 56;
+                        break;
+                    case 97:
+                        System.out.println("Oops: it's a Snake, moved down to 78.");
+                        playerOnePosition = 78;
+                        break;
+                    case 1:
+                        System.out.println("Hurray: it's a Ladder, moved up to 38.");
+                        playerOnePosition = 38;
+                        break;
+                    case 4:
+                        System.out.println("Hurray: it's a Ladder, moved up to 14.");
+                        playerOnePosition = 14;
+                        break;
+                    case 8:
+                        System.out.println("Hurray: it's a Ladder, moved up to 30.");
+                        playerOnePosition = 30;
+                        break;
+                    case 21:
+                        System.out.println("Hurray: it's a Ladder, moved up to 42.");
+                        playerOnePosition = 42;
+                        break;
+                    case 28:
+                        System.out.println("Hurray: it's a Ladder, moved up to 76.");
+                        playerOnePosition = 76;
+                        break;
+                    case 50:
+                        System.out.println("Hurray: it's a Ladder, moved up to 67.");
+                        playerOnePosition = 67;
+                        break;
+                    case 71:
+                        System.out.println("Hurray: it's a Ladder, moved up to 92.");
+                        playerOnePosition = 92;
+                        break;
+                    case 80:
+                        System.out.println("Hurray: it's a Ladder, moved up to 99.");
+                        playerOnePosition = 99;
+                        break;
+                }
+                System.out.println();
             }
         }
         else {
