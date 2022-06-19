@@ -1,11 +1,14 @@
 /*
-The Player then checks for a Option. They are No Play, Ladder or Snake. - Use ((RANDOM)) to check for Options
+Report the number of times the dice was played to win the game
+and also the position after every die role.
 */
 package com.bridgelabz;
 import java.util.Random; //importing Random function
 
 public class SnakeAndLadderGame {
+    //declaring variables
     public static int playerOnePosition = 0;//Initial player1 position.
+    public static int noOfTimesDieRolled = 1; //Number of times die rolled
     public static final int winPosition = 100; //win position is at 100
     public static void main(String args[]) {
         //welcome message
@@ -20,12 +23,13 @@ public class SnakeAndLadderGame {
         Check position using Random:
         If player rolled 6, player moves and rolls a die again else will stay in same position. That is at 0.
         */
-        if(dieRolled ==6 ) {
+        if(dieRolled ==6) {
             System.out.println("Hurray! Player1 enters.\n");
             //Rolling the die till player1 reaches 100 or win.
             while(playerOnePosition<=winPosition){
                 //Rolling the die after player enters into the game.
                 dieRolled = random.nextInt(6) + 1;
+                noOfTimesDieRolled++; //incrementing the count of number of times die rolled.
                 System.out.println("Die rolled: " + dieRolled);
                 playerOnePosition = playerOnePosition + dieRolled; //Player1 moving with the die number.
                 if(playerOnePosition>100){
@@ -38,6 +42,7 @@ public class SnakeAndLadderGame {
                     //Winning the game.
                     System.out.println("Player1 position: " + playerOnePosition);
                     System.out.println("Congratulations! Player1 Won the game......");
+                    System.out.println("Number of times die rolled: " + noOfTimesDieRolled);
                     break;
                 }
                 System.out.println("Player1 position: " + playerOnePosition);
