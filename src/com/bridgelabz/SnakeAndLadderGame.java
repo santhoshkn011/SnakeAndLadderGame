@@ -1,122 +1,70 @@
 /*
-Report the number of times the dice was played to win the game
-and also the position after every die role.
+Play the game with 2 Player.
+In this case if a Player gets a Ladder
+then plays again. Finally report which player won the game.
 */
 package com.bridgelabz;
 import java.util.Random; //importing Random function
+import static com.bridgelabz.Utility.snakeLadder; //importing snakeLadder method from Utility function
 
 public class SnakeAndLadderGame {
-    //declaring variables
-    public static int playerOnePosition = 0;//Initial player1 position.
-    public static int noOfTimesDieRolled = 1; //Number of times die rolled
-    public static final int winPosition = 100; //win position is at 100
+    //Declaring variables
+    public static int playerOnePosition = 0, playerTwoPosition = 0, playerOneNoOfTimesRolled = 0, playerTwoNoOfTimesRolled = 0, dieRolled1, dieRolled2;
+//Player1 method
+    public static void play1() {
+        Random random = new Random();
+        dieRolled1 = random.nextInt(6) + 1; //Rolling die and getting random number from 1 to 6.
+        playerOnePosition = playerOnePosition + dieRolled1; //Player1 position after rolling the die
+        System.out.println("Die Rolled: " + dieRolled1);
+        System.out.println("Player position: " + playerOnePosition);
+        snakeLadder(playerOnePosition); //imported from Utility class
+        playerOneNoOfTimesRolled++; //Counting number of times rolled.
+    }
+    public static void play2() {
+        Random random = new Random();
+        dieRolled2 = random.nextInt(6) + 1;
+        playerTwoPosition = playerTwoPosition + dieRolled2;
+        System.out.println("Die Rolled: " + dieRolled2);
+        System.out.println("Player position: " + playerTwoPosition);
+        Utility.snakeLadder(playerTwoPosition); //imported from Utility class
+        playerTwoNoOfTimesRolled++;
+    }
+    //Main method starts.......
     public static void main(String args[]) {
-        //welcome message
-        System.out.println("Welcome to Snake and Ladder Game. \nLet's Begin.........");
-        System.out.println("Player1 position: " + playerOnePosition + "\n");
-        //Player1 position initial = 0 and rolled die.
-        System.out.println("Player1 rolls the die.");
-        Random random = new Random(); //declaring random object
-        int dieRolled = random.nextInt(6) + 1;
-        System.out.println("Die rolled: " + dieRolled);
-        /*
-        Check position using Random:
-        If player rolled 6, player moves and rolls a die again else will stay in same position. That is at 0.
-        */
-        if(dieRolled ==6) {
-            System.out.println("Hurray! Player1 enters.\n");
-            //Rolling the die till player1 reaches 100 or win.
-            while(playerOnePosition<=winPosition){
-                //Rolling the die after player enters into the game.
-                dieRolled = random.nextInt(6) + 1;
-                noOfTimesDieRolled++; //incrementing the count of number of times die rolled.
-                System.out.println("Die rolled: " + dieRolled);
-                playerOnePosition = playerOnePosition + dieRolled; //Player1 moving with the die number.
-                if(playerOnePosition>100){
-                    //After rolling the die, if it exceeds 100. Stays in same position and continuing the loop.
-                    playerOnePosition = playerOnePosition - dieRolled; //same position
-                    System.out.println("Oops! Roll again. Player1 position: " + playerOnePosition + "\n");
-                    continue;
-                }
-                else if(playerOnePosition == 100) {
-                    //Winning the game.
-                    System.out.println("Player1 position: " + playerOnePosition);
-                    System.out.println("Congratulations! Player1 Won the game......");
-                    System.out.println("Number of times die rolled: " + noOfTimesDieRolled);
-                    break;
-                }
-                System.out.println("Player1 position: " + playerOnePosition);
-                switch(playerOnePosition) {
-                    //Snake positions
-                    case 32:
-                        System.out.println("Oops: it's a Snake, moved down to 10.");
-                        playerOnePosition = 10;
-                        break;
-                    case 36:
-                        System.out.println("Oops: it's a Snake, moved down to 6.");
-                        playerOnePosition = 6;
-                        break;
-                    case 48:
-                        System.out.println("Oops: it's a Snake, moved down to 26.");
-                        playerOnePosition = 26;
-                        break;
-                    case 62:
-                        System.out.println("Oops: it's a Snake, moved down to 18.");
-                        playerOnePosition = 18;
-                        break;
-                    case 88:
-                        System.out.println("Oops: it's a Snake, moved down to 24.");
-                        playerOnePosition = 24;
-                        break;
-                    case 95:
-                        System.out.println("Oops: it's a Snake, moved down to 56.");
-                        playerOnePosition = 56;
-                        break;
-                    case 97:
-                        System.out.println("Oops: it's a Snake, moved down to 78.");
-                        playerOnePosition = 78;
-                        break;
-                    //Ladder positions
-                    case 1:
-                        System.out.println("Hurray: it's a Ladder, moved up to 38.");
-                        playerOnePosition = 38;
-                        break;
-                    case 4:
-                        System.out.println("Hurray: it's a Ladder, moved up to 14.");
-                        playerOnePosition = 14;
-                        break;
-                    case 8:
-                        System.out.println("Hurray: it's a Ladder, moved up to 30.");
-                        playerOnePosition = 30;
-                        break;
-                    case 21:
-                        System.out.println("Hurray: it's a Ladder, moved up to 42.");
-                        playerOnePosition = 42;
-                        break;
-                    case 28:
-                        System.out.println("Hurray: it's a Ladder, moved up to 76.");
-                        playerOnePosition = 76;
-                        break;
-                    case 50:
-                        System.out.println("Hurray: it's a Ladder, moved up to 67.");
-                        playerOnePosition = 67;
-                        break;
-                    case 71:
-                        System.out.println("Hurray: it's a Ladder, moved up to 92.");
-                        playerOnePosition = 92;
-                        break;
-                    case 80:
-                        System.out.println("Hurray: it's a Ladder, moved up to 99.");
-                        playerOnePosition = 99;
-                        break;
-                }
-                System.out.println();
+        Utility.welcomeMessage(0, 0); //Welcome Message importing from Utility class.
+        //Game play begins
+        while (playerOnePosition <= 100 && playerTwoPosition <= 100) {
+            //Player1 rolls
+            System.out.println("\nPlayer1 rolls the die: ");
+            play1(); //Calling play1 method
+            if(playerOnePosition>100){
+                //After rolling the die, if it exceeds 100. Stays in same position and continuing the loop.
+                playerOnePosition = playerOnePosition - dieRolled1; //same position
+                System.out.println("Just missed! Need to roll again. Player1 position: " + playerOnePosition + "\n");
+            }
+            else if(playerOnePosition == 100) {
+                //Winning the game.
+                System.out.println("\nPlayer1 position: " + playerOnePosition);
+                System.out.println("Congratulations! Player1 Won the game :)");
+                break;
+            }
+            //player2 rolls
+            System.out.println("\nPlayer2 rolls the die: ");
+            play2(); //calling play2 method.
+            if(playerTwoPosition>100){
+                //After rolling the die, if it exceeds 100. Stays in same position and continuing the loop.
+                playerTwoPosition = playerTwoPosition - dieRolled2; //same position
+                System.out.println("Just missed! Need to roll again. Player2 position: " + playerTwoPosition + "\n");
+            }
+            else if(playerTwoPosition == 100) {
+                //Winning the game.
+                System.out.println("\nPlayer2 position: " + playerTwoPosition);
+                System.out.println("Congratulations! Player2 Won the game :)");
+                break;
             }
         }
-        else {
-            System.out.println("No Play: Better luck next time to roll 6.");
-            playerOnePosition = 0;
-            System.out.println("Player1 position: " + playerOnePosition);
-        }
+        //Printing number of times rolled.
+        System.out.println("\nPlayer1 rolled: " + playerOneNoOfTimesRolled + " times.");
+        System.out.println("Player2 rolled: " + playerTwoNoOfTimesRolled + " times.\n");
     }
 }
